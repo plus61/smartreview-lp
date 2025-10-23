@@ -1,0 +1,3 @@
+module.exports=[89230,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(69776);a.n(d("[project]/Desktop/2rd_brain/smartreview-lp/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},92658,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(69776);a.n(d("[project]/Desktop/2rd_brain/smartreview-lp/node_modules/next/dist/client/components/builtin/global-error.js"))},65350,a=>{"use strict";a.i(89230);var b=a.i(92658);a.n(b)}];
+
+//# sourceMappingURL=49cf8_next_dist_client_components_builtin_global-error_be577f1e.js.map

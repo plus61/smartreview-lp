@@ -1,0 +1,13 @@
+var R=require("../../chunks/ssr/[turbopack]_runtime.js")("server/app/_not-found/page.js")
+R.c("server/chunks/ssr/Desktop_2rd_brain_smartreview-lp_7f9268c3._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__d318be49._.js")
+R.c("server/chunks/ssr/49cf8_next_dist_esm_build_templates_app-page_e3672c29.js")
+R.c("server/chunks/ssr/[root-of-the-server]__b7ee90db._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__2a7ab120._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__afd604f4._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__a00faaf9._.js")
+R.c("server/chunks/ssr/49cf8_next_dist_client_components_3b713370._.js")
+R.c("server/chunks/ssr/49cf8_next_dist_client_components_builtin_forbidden_b077d4cf.js")
+R.c("server/chunks/ssr/f93ed_brain_smartreview-lp__next-internal_server_app__not-found_page_actions_5edc5d44.js")
+R.m(94285)
+module.exports=R.m(94285).exports
