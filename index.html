@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartReview | 習い事教室専用 口コミ集客ツール</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <style>
+    /* 基本スタイル */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      line-height: 1.6;
+      color: #1F2937;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    /* アニメーション定義 */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+    
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* ヘッダー */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      z-index: 1000;
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: fadeInDown 0.8s ease-out;
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #3B82F6;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .logo::before {
+      content: "📦";
+      font-size: 2rem;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    nav a {
+      margin-left: 2rem;
+      color: #1F2937;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #3B82F6;
+      transition: width 0.3s ease;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    /* ヒーローセクション */
+    .hero {
+      padding: 150px 0 100px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      color: white;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+    
+    .hero p {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 3rem;
+      animation: fadeInUp 1s ease-out 0.4s both;
+    }
+    
+    .hero-subtitle {
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.8);
+      display: block;
+      margin: 0.5rem 0;
+    }
+    
+    .hero-buttons {
+      margin-bottom: 4rem;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+    
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      margin-top: 2rem;
+      animation: fadeInUp 1s ease-out 0.8s both;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 1.2rem 2.5rem;
+      background: linear-gradient(45deg, #3B82F6, #1D4ED8);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      margin: 0.5rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .btn:hover::before {
+      left: 100%;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+    }
+    
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+    }
+    
+    /* セクション */
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
+    
+    /* 画像001: コミュニケーションと知識共有のイラスト */
+    .knowledge-sharing-scene {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .person-reading {
+      position: absolute;
+      left: 20%;
+      bottom: 30%;
+      z-index: 3;
+    }
+    
+    .person-writing {
+      position: absolute;
+      left: 45%;
+      bottom: 40%;
+      z-index: 3;
+    }
+    
+    .books-mountain {
+      position: absolute;
+      left: 35%;
+      bottom: 25%;
+      z-index: 2;
+    }
+    
+    .large-notebook {
+      position: absolute;
+      right: 15%;
+      bottom: 20%;
+      z-index: 2;
+    }
+    
+    .geometric-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    
+    .person-body {
+      position: relative;
+      width: 60px;
+      height: 80px;
+    }
+    
+    .person-1 {
+      background: linear-gradient(45deg, #FCD34D, #F59E0B);
+    }
+    
+    .person-2 {
+      background: linear-gradient(45deg, #10B981, #059669);
+    }
+    
+    .person-head {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      background: #FBB6CE;
+      border-radius: 50%;
+    }
+    
+    .person-torso {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 25px;
+      background: inherit;
+    }
+    
+    .person-arms {
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 8px;
+      background: inherit;
+    }
+    
+    .person-legs {
+      position: absolute;
+      top: 45px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      background: #1F2937;
+    }
+    
+    .books-stack {
+      position: absolute;
+      bottom: -20px;
+      left: -10px;
+      z-index: -1;
+    }
+    
+    .book {
+      width: 40px;
+      height: 8px;
+      margin-bottom: 2px;
+      border-radius: 2px;
+    }
+    
+    .book-blue {
+      background: #3B82F6;
+    }
+    
+    .book-white {
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+    }
+    
+    .book-green {
+      background: #10B981;
+    }
+    
+    .book-red {
+      background: #EF4444;
+    }
+    
+    .pen-tool {
+      position: absolute;
+      top: 30px;
+      right: -15px;
+      width: 20px;
+      height: 4px;
+      background: #10B981;
+      border-radius: 2px;
+    }
+    
+    .books-mountain .book {
+      position: absolute;
+    }
+    
+    .books-mountain .book:nth-child(1) {
+      bottom: 0;
+      left: 0;
+    }
+    
+    .books-mountain .book:nth-child(2) {
+      bottom: 8px;
+      left: 10px;
+    }
+    
+    .books-mountain .book:nth-child(3) {
+      bottom: 16px;
+      left: 20px;
+    }
+    
+    .books-mountain .book:nth-child(4) {
+      bottom: 24px;
+      left: 30px;
+    }
+    
+    .large-notebook {
+      width: 120px;
+      height: 100px;
+    }
+    
+    .notebook-cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #FBB6CE;
+      border-radius: 8px;
+      z-index: 1;
+    }
+    
+    .notebook-pages {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 110px;
+      height: 90px;
+      background: #FFFFFF;
+      border-radius: 4px;
+      z-index: 2;
+    }
+    
+    .page-left {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+    }
+    
+    .page-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+    }
+    
+    .blue-lines {
+      position: absolute;
+      top: 20px;
+      left: 10px;
+      width: 30px;
+      height: 2px;
+      background: #3B82F6;
+    }
+    
+    .blue-lines::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 0;
+      width: 25px;
+      height: 2px;
+      background: #3B82F6;
+    }
+    
+    .blue-lines::after {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 0;
+      width: 20px;
+      height: 2px;
+      background: #3B82F6;
+    }
+    
+    .sticky-notes {
+      position: absolute;
+      top: 15px;
+      right: 10px;
+    }
+    
+    .sticky-note {
+      position: absolute;
+      width: 15px;
+      height: 12px;
+      border-radius: 2px;
+    }
+    
+    .sticky-note.green {
+      background: #10B981;
+      top: 0;
+      left: 0;
+    }
+    
+    .sticky-note.orange {
+      background: #F59E0B;
+      top: 8px;
+      left: 5px;
+    }
+    
+    .sticky-note.blue {
+      background: #3B82F6;
+      top: 16px;
+      left: 10px;
+    }
+    
+    .geometric-background .shape {
+      position: absolute;
+      opacity: 0.3;
+    }
+    
+    .shape-1 {
+      top: 20%;
+      left: 10%;
+      width: 30px;
+      height: 30px;
+      background: #3B82F6;
+      transform: rotate(45deg);
+    }
+    
+    .shape-2 {
+      top: 60%;
+      left: 80%;
+      width: 25px;
+      height: 25px;
+      background: #10B981;
+      border-radius: 50%;
+    }
+    
+    .shape-3 {
+      top: 40%;
+      left: 70%;
+      width: 20px;
+      height: 20px;
+      background: #F59E0B;
+      transform: rotate(30deg);
+    }
+    
+    .shape-4 {
+      top: 70%;
+      left: 20%;
+      width: 35px;
+      height: 15px;
+      background: #EF4444;
+      border-radius: 8px;
+    }
+    
+    .shape-5 {
+      top: 30%;
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      background: #8B5CF6;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 4rem;
+      color: #1F2937;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(45deg, #3B82F6, #1D4ED8);
+      border-radius: 2px;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    
+    .card {
+      background: white;
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(45deg, #3B82F6, #1D4ED8);
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    
+    .card h3 {
+      margin: 1.5rem 0;
+      color: #3B82F6;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    
+    .card p {
+      color: #6B7280;
+      line-height: 1.8;
+    }
+    
+    .card .material-icons {
+      font-size: 4rem;
+      color: #3B82F6;
+      margin-bottom: 1rem;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    /* 料金セクション */
+    .pricing {
+      background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+    }
+    
+    .pricing-card {
+      background: white;
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .pricing-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
+    
+    .pricing-card.featured {
+      border: 3px solid #3B82F6;
+      transform: scale(1.05);
+    }
+    
+    .pricing-card.featured::before {
+      content: '人気';
+      position: absolute;
+      top: 20px;
+      right: -30px;
+      background: #3B82F6;
+      color: white;
+      padding: 5px 40px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transform: rotate(45deg);
+    }
+    
+    .price {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #3B82F6;
+      margin: 1rem 0;
+    }
+    
+    .price span {
+      font-size: 1rem;
+      color: #6B7280;
+    }
+    
+    .price-sub {
+      font-size: 0.9rem;
+      color: #9CA3AF;
+      margin-top: 0.5rem;
+    }
+    
+    /* What's Section - Scroll Animation (Talknoteと同様の3ユニット構成) */
+    .whats-section {
+      position: relative;
+      height: 600vh; /* 3ユニット分の高さ（Talknoteと同様） */
+      overflow: hidden;
+    }
+    
+    .whats-container {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+    
+    .whats-unit {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+    }
+    
+    .whats-unit.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .whats-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    
+    .unit-bg-1 {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .unit-bg-2 {
+      background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+    }
+    
+    .unit-bg-3 {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    }
+    
+    .unit-bg-4 {
+      background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+    }
+    
+    .clouds {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .cloud-1 {
+      width: 80px;
+      height: 40px;
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+    
+    .cloud-2 {
+      width: 120px;
+      height: 60px;
+      top: 60%;
+      right: 15%;
+      animation-delay: 2s;
+    }
+    
+    .cloud-3 {
+      width: 100px;
+      height: 50px;
+      top: 30%;
+      right: 30%;
+      animation-delay: 4s;
+    }
+    
+    .whats-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 100vh;
+      align-items: center;
+      padding: 0 4rem;
+    }
+    
+    .whats-text {
+      color: white;
+      padding-right: 2rem;
+    }
+    
+    .unit-indicator {
+      position: absolute;
+      left: 2rem;
+      bottom: 2rem;
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .unit-category {
+      font-size: 1rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 1rem;
+    }
+    
+    .whats-text h3 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+    
+    .whats-text p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+    }
+    
+    .view-more {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .view-more:hover {
+      transform: translateX(10px);
+    }
+    
+    .view-more .material-icons {
+      font-size: 1.2rem;
+    }
+    
+    /* イラストレーション */
+    .whats-illustration {
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .illustration-container {
+      position: relative;
+      width: 100%;
+      height: 80%;
+      max-width: 500px;
+    }
+    
+    /* Unit 1: 本棚と人物 */
+    .bookshelf {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 5px;
+      padding: 10px;
+    }
+    
+    .book {
+      height: 100%;
+      border-radius: 3px;
+    }
+    
+    .book-red { background: #EF4444; }
+    .book-orange { background: #F97316; }
+    .book-green { background: #10B981; }
+    .book-blue { background: #3B82F6; }
+    .book-black { background: #1F2937; }
+    
+    .person {
+      position: absolute;
+      width: 40px;
+      height: 60px;
+    }
+    
+    .person-left {
+      bottom: 20%;
+      left: 30%;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .person-right {
+      top: 20%;
+      right: 30%;
+      animation: float 3s ease-in-out infinite 1.5s;
+    }
+    
+    .person-body {
+      width: 100%;
+      height: 40px;
+      background: #3B82F6;
+      border-radius: 20px 20px 5px 5px;
+    }
+    
+    .person-head {
+      width: 20px;
+      height: 20px;
+      background: #FBBF24;
+      border-radius: 50%;
+      margin: 0 auto 5px;
+    }
+    
+    .person-arms {
+      width: 100%;
+      height: 20px;
+      background: #3B82F6;
+      border-radius: 10px;
+      margin-top: 5px;
+    }
+    
+    .floating-books {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .floating-book {
+      position: absolute;
+      width: 20px;
+      height: 30px;
+      border-radius: 3px;
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    .book-1 {
+      background: #EF4444;
+      top: 20%;
+      left: 20%;
+      animation-delay: 0s;
+    }
+    
+    .book-2 {
+      background: #F97316;
+      top: 60%;
+      right: 20%;
+      animation-delay: 1s;
+    }
+    
+    .book-3 {
+      background: #10B981;
+      top: 40%;
+      right: 10%;
+      animation-delay: 2s;
+    }
+    
+    /* Unit 2: データ可視化 */
+    .data-visualization {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+    }
+    
+    .chart-container {
+      position: absolute;
+      top: 20%;
+      left: 20%;
+    }
+    
+    .pie-chart {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: conic-gradient(#3B82F6 0deg 120deg, #EF4444 120deg 240deg, #10B981 240deg 360deg);
+      position: relative;
+    }
+    
+    .lightbulb {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      background: #FBBF24;
+      border-radius: 50%;
+    }
+    
+    .mobile-device {
+      position: absolute;
+      top: 30%;
+      right: 20%;
+      width: 60px;
+      height: 100px;
+      background: white;
+      border-radius: 10px;
+      padding: 5px;
+    }
+    
+    .device-screen {
+      width: 100%;
+      height: 100%;
+      background: #F3F4F6;
+      border-radius: 5px;
+      padding: 5px;
+    }
+    
+    .task-item {
+      width: 100%;
+      height: 8px;
+      background: #EF4444;
+      border-radius: 2px;
+      margin-bottom: 5px;
+    }
+    
+    .connection-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .line {
+      position: absolute;
+      height: 2px;
+      background: #F97316;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    .line-1 {
+      top: 30%;
+      left: 30%;
+      width: 40%;
+      animation-delay: 0s;
+    }
+    
+    .line-2 {
+      top: 50%;
+      left: 20%;
+      width: 30%;
+      animation-delay: 0.5s;
+    }
+    
+    .line-3 {
+      top: 70%;
+      left: 40%;
+      width: 35%;
+      animation-delay: 1s;
+    }
+    
+    .person-analyst {
+      top: 10%;
+      left: 10%;
+    }
+    
+    .person-operator {
+      top: 40%;
+      right: 10%;
+    }
+    
+    .person-manager {
+      bottom: 20%;
+      left: 50%;
+    }
+    
+    .geometric-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .shape {
+      position: absolute;
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    .triangle-green {
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 25px solid #10B981;
+      top: 20%;
+      right: 20%;
+      animation-delay: 0s;
+    }
+    
+    .triangle-orange {
+      width: 0;
+      height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-bottom: 20px solid #F97316;
+      bottom: 30%;
+      left: 20%;
+      animation-delay: 1s;
+    }
+    
+    .circle-red {
+      width: 20px;
+      height: 20px;
+      background: #EF4444;
+      border-radius: 50%;
+      top: 60%;
+      right: 30%;
+      animation-delay: 2s;
+    }
+    
+    .square-white {
+      width: 15px;
+      height: 15px;
+      background: white;
+      top: 40%;
+      left: 30%;
+      animation-delay: 0.5s;
+    }
+    
+    .diamond-black {
+      width: 20px;
+      height: 20px;
+      background: #1F2937;
+      transform: rotate(45deg);
+      bottom: 10%;
+      right: 10%;
+      animation-delay: 1.5s;
+    }
+    
+    .hexagon-purple {
+      width: 16px;
+      height: 16px;
+      background: #8B5CF6;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      top: 60%;
+      left: 60%;
+      animation-delay: 2s;
+    }
+    
+    /* Unit 4: Advanced Features Styles */
+    .advanced-features {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+    }
+    
+    .feature-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .feature-item:hover {
+      transform: scale(1.05);
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .feature-icon {
+      width: 24px;
+      height: 24px;
+      background: #FFFFFF;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    
+    .feature-label {
+      font-size: 10px;
+      color: #FFFFFF;
+      font-weight: 600;
+      text-align: center;
+    }
+    
+    .connection-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    
+    .line {
+      position: absolute;
+      background: linear-gradient(90deg, transparent, #FFFFFF, transparent);
+      height: 2px;
+      opacity: 0.6;
+    }
+    
+    .line-1 {
+      top: 25%;
+      left: 25%;
+      width: 50%;
+      transform: rotate(45deg);
+    }
+    
+    .line-2 {
+      top: 25%;
+      right: 25%;
+      width: 50%;
+      transform: rotate(-45deg);
+    }
+    
+    .line-3 {
+      bottom: 25%;
+      left: 25%;
+      width: 50%;
+      transform: rotate(-45deg);
+    }
+    
+    .line-4 {
+      bottom: 25%;
+      right: 25%;
+      width: 50%;
+      transform: rotate(45deg);
+    }
+    
+    /* Unit 3: サポートシーン */
+    .support-scene {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+    }
+    
+    .person-customer {
+      bottom: 30%;
+      left: 20%;
+    }
+    
+    .person-support {
+      top: 20%;
+      right: 20%;
+    }
+    
+    .support-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .support-icon {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      animation: pulse 3s ease-in-out infinite;
+    }
+    
+    .icon-1 {
+      top: 30%;
+      left: 50%;
+      animation-delay: 0s;
+    }
+    
+    .icon-2 {
+      top: 60%;
+      right: 30%;
+      animation-delay: 1s;
+    }
+    
+    .icon-3 {
+      bottom: 20%;
+      left: 50%;
+      animation-delay: 2s;
+    }
+    
+    /* Why Section */
+    .why-section {
+      padding: 100px 0;
+    }
+    
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+    
+    .why-item {
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .why-icon {
+      margin-bottom: 1.5rem;
+    }
+    
+    .why-icon .material-icons {
+      font-size: 3rem;
+      color: #3B82F6;
+    }
+    
+    .why-item h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1F2937;
+      margin-bottom: 1rem;
+    }
+    
+    .why-item p {
+      color: #6B7280;
+      line-height: 1.8;
+    }
+    
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    /* フッター */
+    footer {
+      background: linear-gradient(135deg, #1F2937 0%, #111827 100%);
+      color: white;
+      padding: 4rem 0 2rem;
+      text-align: center;
+    }
+    
+    /* スクロールアニメーション */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* レスポンシブ */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .pricing-card.featured {
+        transform: none;
+      }
+      
+      .whats-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-stats {
+        gap: 2rem;
+      }
+      
+      .contact-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .whats-content {
+        grid-template-columns: 1fr;
+        padding: 0 2rem;
+      }
+      
+      .whats-text {
+        padding-right: 0;
+        margin-bottom: 2rem;
+      }
+      
+      .whats-text h3 {
+        font-size: 2rem;
+      }
+      
+      .illustration-container {
+        height: 60%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">SmartProcure</a>
+        <nav>
+          <a href="#features">機能</a>
+          <a href="#pricing">料金</a>
+          <a href="#contact">お問い合わせ</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>「悪い口コミを防ぎ、良い口コミだけを増やす」<br><span class="hero-subtitle">習い事教室専用のスマート口コミ集客ツール</span><br>SmartReview</h1>
+        <p>アンケートで満足度を測定してから<br>高評価のお客様だけを口コミサイトへ自動誘導</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn">無料で始める</a>
+          <a href="#contact" class="btn btn-secondary">デモを見る</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">導入実績</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">4.5</div>
+            <div class="stat-label">口コミ評価</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">3.2倍</div>
+            <div class="stat-label">口コミ増加</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <!-- 画像001: コミュニケーションと知識共有のイラスト -->
+        <div class="hero-illustration">
+          <div class="knowledge-sharing-scene">
+            <!-- 左側の人物と書籍 -->
+            <div class="person-reading">
+              <div class="person-body person-1">
+                <div class="person-head"></div>
+                <div class="person-torso"></div>
+                <div class="person-arms"></div>
+                <div class="person-legs"></div>
+              </div>
+              <div class="books-stack">
+                <div class="book book-blue"></div>
+                <div class="book book-white"></div>
+                <div class="book book-green"></div>
+              </div>
+              <div class="pen-tool"></div>
+            </div>
+            
+            <!-- 中央の書籍の山 -->
+            <div class="books-mountain">
+              <div class="book book-red"></div>
+              <div class="book book-green"></div>
+              <div class="book book-blue"></div>
+              <div class="book book-white"></div>
+            </div>
+            
+            <!-- 中央の立つ人物 -->
+            <div class="person-writing">
+              <div class="person-body person-2">
+                <div class="person-head"></div>
+                <div class="person-torso"></div>
+                <div class="person-arms"></div>
+                <div class="person-legs"></div>
+              </div>
+            </div>
+            
+            <!-- 右側の大きなノート -->
+            <div class="large-notebook">
+              <div class="notebook-cover"></div>
+              <div class="notebook-pages">
+                <div class="page-left">
+                  <div class="blue-lines"></div>
+                </div>
+                <div class="page-right">
+                  <div class="sticky-notes">
+                    <div class="sticky-note green"></div>
+                    <div class="sticky-note orange"></div>
+                    <div class="sticky-note blue"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 背景の幾何学模様 -->
+            <div class="geometric-background">
+              <div class="shape shape-1"></div>
+              <div class="shape shape-2"></div>
+              <div class="shape shape-3"></div>
+              <div class="shape shape-4"></div>
+              <div class="shape shape-5"></div>
+            </div>
+          </div>
+          
+          <!-- 画像002: 満足度が高い→口コミサイトへ誘導の流れ図 -->
+          <div class="flow-diagram">
+            <div class="flow-step step-1">
+              <div class="step-icon">📱</div>
+              <div class="step-text">アンケート回答</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step step-2">
+              <div class="step-icon">⭐</div>
+              <div class="step-text">満足度判定</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step step-3">
+              <div class="step-icon">📝</div>
+              <div class="step-text">口コミサイト誘導</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's SmartReview -->
+  <section class="whats-section" id="whats-smartreview">
+    <div class="whats-container">
+      <!-- Unit 1: 質問項目カスタマイズ -->
+      <div class="whats-unit" data-unit="1">
+        <div class="whats-background unit-bg-1">
+          <div class="clouds cloud-1"></div>
+          <div class="clouds cloud-2"></div>
+          <div class="clouds cloud-3"></div>
+        </div>
+        <div class="whats-content">
+          <div class="whats-text">
+            <div class="unit-indicator">01</div>
+            <div class="unit-category">質問項目カスタマイズ</div>
+            <h3>業種別テンプレートで<br>すぐに始められる</h3>
+            <p>ピアノ、水泳、英会話など15業種のテンプレートを用意。<br>質問を自由に追加・編集でき、<br>5段階評価、自由記述、NPS形式に対応します。</p>
+            <div class="view-more">
+              <span class="material-icons">edit</span>
+              <span>VIEW MORE</span>
+            </div>
+          </div>
+          <div class="whats-illustration">
+            <div class="illustration-container">
+              <!-- 画像003: テンプレート選択画面 -->
+              <div class="template-selection">
+                <div class="template-grid">
+                  <div class="template-card active">
+                    <div class="template-icon">🎹</div>
+                    <div class="template-name">ピアノ教室</div>
+                  </div>
+                  <div class="template-card">
+                    <div class="template-icon">🏊</div>
+                    <div class="template-name">スイミング</div>
+                  </div>
+                  <div class="template-card">
+                    <div class="template-icon">💬</div>
+                    <div class="template-name">英会話</div>
+                  </div>
+                  <div class="template-card">
+                    <div class="template-icon">💻</div>
+                    <div class="template-name">プログラミング</div>
+                  </div>
+                </div>
+                <div class="question-editor">
+                  <div class="question-item">
+                    <span class="question-number">1</span>
+                    <span class="question-text">講師の指導力はいかがでしたか？</span>
+                    <span class="question-type">5段階評価</span>
+                  </div>
+                  <div class="question-item">
+                    <span class="question-number">2</span>
+                    <span class="question-text">お子様の上達実感は？</span>
+                    <span class="question-type">5段階評価</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unit 2: 組織コンディション -->
+      <div class="whats-unit" data-unit="2">
+        <div class="whats-background unit-bg-2">
+          <div class="clouds cloud-1"></div>
+          <div class="clouds cloud-2"></div>
+          <div class="clouds cloud-3"></div>
+        </div>
+        <div class="whats-content">
+          <div class="whats-text">
+            <div class="unit-indicator">02</div>
+            <div class="unit-category">スマート遷移設定</div>
+            <h3>評価点ごとに<br>自動で振り分け</h3>
+            <p>4点以上→GMOくちコミ、3点以下→改善要望フォーム。<br>複数の口コミサイトに対応し、<br>Googleマイビジネス連携も可能です。</p>
+            <div class="view-more">
+              <span class="material-icons">settings</span>
+              <span>VIEW MORE</span>
+            </div>
+          </div>
+          <div class="whats-illustration">
+            <div class="illustration-container">
+              <!-- 画像004: フローチャート -->
+              <div class="flowchart">
+                <div class="flow-start">
+                  <div class="flow-icon">📱</div>
+                  <div class="flow-text">アンケート回答</div>
+                </div>
+                <div class="flow-branch">
+                  <div class="branch-high">
+                    <div class="branch-icon">⭐</div>
+                    <div class="branch-text">4-5点</div>
+                    <div class="branch-arrow">↓</div>
+                    <div class="branch-destination">
+                      <div class="destination-icon">📝</div>
+                      <div class="destination-text">GMOくちコミ</div>
+                    </div>
+                  </div>
+                  <div class="branch-middle">
+                    <div class="branch-icon">😐</div>
+                    <div class="branch-text">3点</div>
+                    <div class="branch-arrow">↓</div>
+                    <div class="branch-destination">
+                      <div class="destination-icon">💬</div>
+                      <div class="destination-text">お礼メッセージ</div>
+                    </div>
+                  </div>
+                  <div class="branch-low">
+                    <div class="branch-icon">😞</div>
+                    <div class="branch-text">1-2点</div>
+                    <div class="branch-arrow">↓</div>
+                    <div class="branch-destination">
+                      <div class="destination-icon">🔧</div>
+                      <div class="destination-text">改善フォーム</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unit 3: リアルタイム集計ダッシュボード -->
+      <div class="whats-unit" data-unit="3">
+        <div class="whats-background unit-bg-3">
+          <div class="clouds cloud-1"></div>
+          <div class="clouds cloud-2"></div>
+          <div class="clouds cloud-3"></div>
+        </div>
+        <div class="whats-content">
+          <div class="whats-text">
+            <div class="unit-indicator">03</div>
+            <div class="unit-category">リアルタイム集計ダッシュボード</div>
+            <h3>NPSスコア、満足度推移を<br>グラフ表示</h3>
+            <p>講師別・クラス別の評価分析、<br>改善すべきポイントを自動抽出。<br>CSVエクスポート機能も完備。</p>
+            <div class="view-more">
+              <span class="material-icons">analytics</span>
+              <span>VIEW MORE</span>
+            </div>
+          </div>
+          <div class="whats-illustration">
+            <div class="illustration-container">
+              <!-- 画像005: グラフ画面 -->
+              <div class="dashboard-preview">
+                <div class="dashboard-header">
+                  <h3>満足度分析ダッシュボード</h3>
+                </div>
+                <div class="dashboard-content">
+                  <div class="chart-section">
+                    <div class="chart-title">総合満足度の推移</div>
+                    <div class="line-chart">
+                      <div class="chart-line"></div>
+                      <div class="chart-points">
+                        <div class="point point-1"></div>
+                        <div class="point point-2"></div>
+                        <div class="point point-3"></div>
+                        <div class="point point-4"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="stats-grid">
+                    <div class="stat-card">
+                      <div class="stat-value">4.5</div>
+                      <div class="stat-label">平均評価</div>
+                    </div>
+                    <div class="stat-card">
+                      <div class="stat-value">65%</div>
+                      <div class="stat-label">回答率</div>
+                    </div>
+                    <div class="stat-card">
+                      <div class="stat-value">40%</div>
+                      <div class="stat-label">口コミ投稿率</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Why choose SmartProcure -->
+  <section class="why-section">
+    <div class="container">
+      <h2 class="section-title fade-in">SmartProcureが選ばれる理由</h2>
+      <div class="why-grid">
+        <div class="why-item fade-in">
+          <div class="why-icon">
+            <span class="material-icons">storage</span>
+        </div>
+          <h3>情報の整理・蓄積</h3>
+          <p>日々の調達情報がテーマごとに振り返りやすい形で整理され、<strong>容量制限無制限</strong>で蓄積されていきます。</p>
+        </div>
+        <div class="why-item fade-in">
+          <div class="why-icon">
+            <span class="material-icons">visibility</span>
+        </div>
+          <h3>社内の見える化の実現</h3>
+          <p>オープンなコミュニケーションで<strong>社内の情報格差をなくす</strong>と共に、分析機能によって、チームや社員のコンディションも見える化します。</p>
+        </div>
+        <div class="why-item fade-in">
+          <div class="why-icon">
+            <span class="material-icons">smartphone</span>
+          </div>
+          <h3>シンプルで見やすい・使いやすい</h3>
+          <p>PCブラウザ、スマートフォンアプリともに、シンプルで見やすいUI、UXにこだわっており、<strong>誰でも直感的に操作・活用が可能</strong>です。</p>
+        </div>
+        <div class="why-item fade-in">
+          <div class="why-icon">
+            <span class="material-icons">support</span>
+          </div>
+          <h3>充実の導入サポート</h3>
+          <p>導入目的に合わせた、調達プロセス設計のご提案、運用ルール作り等、多彩な実績をもとにサポート。起こりがちな<strong>「せっかく導入したのに浸透しない」を防ぎます</strong>。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 料金 -->
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <h2 class="section-title fade-in">PRICE</h2>
+      <p style="text-align: center; font-size: 1.2rem; color: #6B7280; margin-bottom: 3rem;">規模や用途に応じた最適な料金プランをご案内します。</p>
+      <div class="grid">
+        <div class="pricing-card fade-in">
+          <h3>年間契約一括払い</h3>
+          <div class="price">1,180<span>円/月</span></div>
+          <p>1ユーザーライセンス</p>
+          <div class="price-sub">1アルバイトライセンス 580円/月</div>
+          <ul style="text-align: left; margin: 2rem 0; list-style: none;">
+            <li style="margin: 0.5rem 0;">✓ 基本自動調達機能</li>
+            <li style="margin: 0.5rem 0;">✓ 在庫管理（100アイテムまで）</li>
+            <li style="margin: 0.5rem 0;">✓ メールサポート</li>
+            <li style="margin: 0.5rem 0;">✓ 基本レポート</li>
+          </ul>
+          <a href="#contact" class="btn">お見積りはこちら</a>
+        </div>
+        <div class="pricing-card featured fade-in">
+          <h3>月契約月々払い</h3>
+          <div class="price">1,380<span>円/月</span></div>
+          <p>1ユーザーライセンス</p>
+          <div class="price-sub">1アルバイトライセンス 680円/月</div>
+          <ul style="text-align: left; margin: 2rem 0; list-style: none;">
+            <li style="margin: 0.5rem 0;">✓ 全自動調達機能</li>
+            <li style="margin: 0.5rem 0;">✓ AI予測分析</li>
+            <li style="margin: 0.5rem 0;">✓ 在庫管理（無制限）</li>
+            <li style="margin: 0.5rem 0;">✓ 優先サポート</li>
+            <li style="margin: 0.5rem 0;">✓ カスタムレポート</li>
+          </ul>
+          <a href="#contact" class="btn">詳細を見る</a>
+        </div>
+        <div class="pricing-card fade-in">
+          <h3>エンタープライズプラン</h3>
+          <div class="price">お問い合わせ</div>
+          <p>価格設定については</p>
+          <div class="price-sub">お問い合わせください</div>
+          <ul style="text-align: left; margin: 2rem 0; list-style: none;">
+            <li style="margin: 0.5rem 0;">✓ 全機能アクセス</li>
+            <li style="margin: 0.5rem 0;">✓ 専用サーバー</li>
+            <li style="margin: 0.5rem 0;">✓ 24/7専任サポート</li>
+            <li style="margin: 0.5rem 0;">✓ カスタム統合</li>
+            <li style="margin: 0.5rem 0;">✓ SLA保証</li>
+          </ul>
+          <a href="#contact" class="btn">お見積りはこちら</a>
+        </div>
+      </div>
+      <p style="text-align: center; font-size: 0.9rem; color: #9CA3AF; margin-top: 2rem;">すべて税抜価格です。<br>管理者費用（月々5,000円/人）が別途発生します。</p>
+    </div>
+  </section>
+
+  <!-- お問い合わせ -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title fade-in">組織の調達管理を最適化しませんか？</h2>
+      <div style="text-align: center;">
+        <p style="margin-bottom: 3rem; font-size: 1.2rem; color: #6B7280;">14日間無料でご利用いただけます。<br>機能、価格、導入方法、その他ご不明な点はお気軽にお問い合わせください。</p>
+        <div class="contact-buttons">
+          <a href="#" class="btn">お問い合わせ</a>
+          <a href="#" class="btn btn-secondary">無料トライアル</a>
+          <a href="#" class="btn btn-secondary">資料ダウンロード</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 SmartProcure Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript for scroll animations -->
+  <script>
+    // スクロールアニメーション
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // アニメーション対象要素を監視
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // What's SmartProcure スクロールアニメーション（分析結果に基づく精密制御）
+    const whatsSection = document.getElementById('whats-smartprocure');
+    const whatsUnits = document.querySelectorAll('.whats-unit');
+    
+    if (whatsSection) {
+      // Talknoteと同様の3ユニット構成
+      const sectionConfig = [
+        { duration: 2.02, motion: 'horizontal_subtle', layout: 'hero' },
+        { duration: 1.28, motion: 'horizontal_subtle', layout: 'feature' },
+        { duration: 16.7, motion: 'horizontal_subtle', layout: 'feature' }
+      ];
+      
+      let currentUnit = 0;
+      let isAnimating = false;
+      
+      window.addEventListener('scroll', () => {
+        if (isAnimating) return;
+        
+        const rect = whatsSection.getBoundingClientRect();
+        const sectionTop = rect.top;
+        const sectionHeight = rect.height;
+        const viewportHeight = window.innerHeight;
+        
+        // セクションが画面に入った時の処理
+        if (sectionTop <= 0 && sectionTop > -sectionHeight) {
+          const scrollProgress = Math.abs(sectionTop) / sectionHeight;
+          
+          // 分析結果に基づくユニット切り替え
+          let unitIndex = 0;
+          let cumulativeProgress = 0;
+          
+          for (let i = 0; i < sectionConfig.length; i++) {
+            const sectionDuration = sectionConfig[i].duration;
+            const sectionRatio = sectionDuration / 20.0; // 3ユニット用の総時間
+            const extendedRatio = sectionRatio; // 標準の切り替え時間
+            
+            if (scrollProgress >= cumulativeProgress && scrollProgress < cumulativeProgress + extendedRatio) {
+              unitIndex = i;
+              break;
+            }
+            cumulativeProgress += extendedRatio;
+          }
+          
+          // ユニット切り替え
+          if (unitIndex !== currentUnit) {
+            isAnimating = true;
+            
+            // 全てのユニットを非アクティブにする
+            whatsUnits.forEach(unit => unit.classList.remove('active'));
+            
+            // 現在のユニットをアクティブにする
+            if (whatsUnits[unitIndex]) {
+              whatsUnits[unitIndex].classList.add('active');
+            }
+            
+            currentUnit = unitIndex;
+            
+            // アニメーション完了後にフラグをリセット
+            setTimeout(() => {
+              isAnimating = false;
+            }, 800);
+          }
+          
+          // モーションタイプに応じたパララックス効果（スクロール速度を1/2に調整）
+          whatsUnits.forEach((unit, index) => {
+            const text = unit.querySelector('.whats-text');
+            const illustration = unit.querySelector('.whats-illustration');
+            
+            if (text && illustration) {
+              const unitProgress = (scrollProgress * 6) - index; // 3ユニット用のスクロール範囲
+              if (unitProgress >= 0 && unitProgress <= 2) { // 3ユニット用の範囲
+                const config = sectionConfig[index];
+                
+                // スクロール速度を1/4に調整
+                const adjustedProgress = unitProgress * 0.25;
+                
+                switch (config.motion) {
+                  case 'horizontal_subtle':
+                    // 微細な横方向の動き（速度1/4）
+                    const horizontalOffset = (adjustedProgress - 0.125) * 40;
+                    text.style.transform = `translateX(${horizontalOffset}px)`;
+                    illustration.style.transform = `translateX(${-horizontalOffset * 0.5}px)`;
+                    break;
+                    
+                  case 'slide_left':
+                    // 左スライド効果（速度1/4）
+                    const slideOffset = (adjustedProgress - 0.125) * 200;
+                    text.style.transform = `translateX(${slideOffset}px)`;
+                    illustration.style.transform = `translateX(${-slideOffset * 0.8}px)`;
+                    break;
+                    
+                  default:
+                    // デフォルトの縦方向パララックス（速度1/4）
+                    const parallaxOffset = (adjustedProgress - 0.125) * 100;
+                    text.style.transform = `translateY(${parallaxOffset}px)`;
+                    illustration.style.transform = `translateY(${-parallaxOffset * 0.5}px)`;
+                }
+              }
+            }
+          });
+        }
+      });
+    }
+
+    // ヘッダーのスクロール効果
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+        header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.15)';
+      } else {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+      }
+    });
+
+    // スムーススクロール
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

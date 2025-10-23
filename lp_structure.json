@@ -1,0 +1,229 @@
+{
+  "schema_version": "1.0.0",
+  "video_meta": {
+    "fps": 59.94005994005994,
+    "frame_count": 5768,
+    "duration_sec": 96.23,
+    "resolution": {
+      "width": 640,
+      "height": 416
+    },
+    "sampling": {
+      "sample_every_n_frames": 11,
+      "hist_threshold": 0.3,
+      "dynamic_threshold": 0.3
+    }
+  },
+  "sections": [
+    {
+      "id": "section_01",
+      "start_frame": 0,
+      "end_frame": 121,
+      "start_timecode": "00:00:00.000",
+      "end_timecode": "00:00:02.018",
+      "duration_sec": 2.02,
+      "transition_in": "soft",
+      "transition_out": "cut",
+      "dominant_motion": "horizontal_subtle",
+      "keyframe_path": "/mnt/data/lp_analysis/section_01_keyframe.jpg",
+      "layout_hint": "hero",
+      "elements": [
+        {
+          "type": "heading",
+          "role": "h1",
+          "text": "{H1: 強いベネフィットを端的に}",
+          "animation": "fade-up",
+          "delay_ms": 60
+        },
+        {
+          "type": "subheading",
+          "role": "lead",
+          "text": "{Lead: 一文で価値を説明}",
+          "animation": "fade-up",
+          "delay_ms": 140
+        },
+        {
+          "type": "cta_button",
+          "label": "{CTA: 今すぐ◯◯}",
+          "style": "primary",
+          "animation": "zoom-in",
+          "delay_ms": 220
+        },
+        {
+          "type": "supporting_image",
+          "src": "{hero_image}",
+          "parallax": true
+        }
+      ],
+      "actions": [
+        {
+          "type": "on_enter",
+          "effect": "stagger_children",
+          "stagger_ms": 80
+        },
+        {
+          "type": "on_scroll",
+          "effect": "activate_viewport",
+          "threshold": 0.25
+        }
+      ]
+    },
+    {
+      "id": "section_02",
+      "start_frame": 121,
+      "end_frame": 198,
+      "start_timecode": "00:00:02.018",
+      "end_timecode": "00:00:03.303",
+      "duration_sec": 1.28,
+      "transition_in": "cut",
+      "transition_out": "cut",
+      "dominant_motion": "horizontal_subtle",
+      "keyframe_path": "/mnt/data/lp_analysis/section_02_keyframe.jpg",
+      "layout_hint": "feature",
+      "elements": [
+        {
+          "type": "section_title",
+          "role": "h2",
+          "text": "{H2: セクション見出し}",
+          "animation": "fade-up",
+          "delay_ms": 60
+        },
+        {
+          "type": "body",
+          "text": "{本文: 箇条書き3点で要約}",
+          "animation": "fade-up",
+          "delay_ms": 120
+        },
+        {
+          "type": "media",
+          "kind": "image_or_mock",
+          "animation": "slide-in",
+          "delay_ms": 180
+        },
+        {
+          "type": "cta_text",
+          "text": "{補足CTA or 次へ誘導}",
+          "animation": "none",
+          "delay_ms": 0
+        }
+      ],
+      "actions": [
+        {
+          "type": "on_enter",
+          "effect": "stagger_children",
+          "stagger_ms": 80
+        },
+        {
+          "type": "on_scroll",
+          "effect": "activate_viewport",
+          "threshold": 0.25
+        }
+      ]
+    },
+    {
+      "id": "section_03",
+      "start_frame": 198,
+      "end_frame": 1199,
+      "start_timecode": "00:00:03.303",
+      "end_timecode": "00:00:20.003",
+      "duration_sec": 16.7,
+      "transition_in": "cut",
+      "transition_out": "cut",
+      "dominant_motion": "horizontal_subtle",
+      "keyframe_path": "/mnt/data/lp_analysis/section_03_keyframe.jpg",
+      "layout_hint": "feature",
+      "elements": [
+        {
+          "type": "section_title",
+          "role": "h2",
+          "text": "{H2: セクション見出し}",
+          "animation": "fade-up",
+          "delay_ms": 60
+        },
+        {
+          "type": "body",
+          "text": "{本文: 箇条書き3点で要約}",
+          "animation": "fade-up",
+          "delay_ms": 120
+        },
+        {
+          "type": "media",
+          "kind": "image_or_mock",
+          "animation": "slide-in",
+          "delay_ms": 180
+        },
+        {
+          "type": "cta_text",
+          "text": "{補足CTA or 次へ誘導}",
+          "animation": "none",
+          "delay_ms": 0
+        }
+      ],
+      "actions": [
+        {
+          "type": "on_enter",
+          "effect": "stagger_children",
+          "stagger_ms": 80
+        },
+        {
+          "type": "on_scroll",
+          "effect": "activate_viewport",
+          "threshold": 0.25
+        }
+      ]
+    },
+    {
+      "id": "section_04",
+      "start_frame": 1199,
+      "end_frame": 5764,
+      "start_timecode": "00:00:20.003",
+      "end_timecode": "00:01:36.162",
+      "duration_sec": 76.16,
+      "transition_in": "cut",
+      "transition_out": "soft",
+      "dominant_motion": "slide_left",
+      "keyframe_path": "/mnt/data/lp_analysis/section_04_keyframe.jpg",
+      "layout_hint": "detail",
+      "elements": [
+        {
+          "type": "section_title",
+          "role": "h2",
+          "text": "{H2: セクション見出し}",
+          "animation": "fade-up",
+          "delay_ms": 60
+        },
+        {
+          "type": "body",
+          "text": "{本文: 箇条書き3点で要約}",
+          "animation": "fade-up",
+          "delay_ms": 120
+        },
+        {
+          "type": "media",
+          "kind": "image_or_mock",
+          "animation": "slide-in",
+          "delay_ms": 180
+        },
+        {
+          "type": "cta_text",
+          "text": "{補足CTA or 次へ誘導}",
+          "animation": "none",
+          "delay_ms": 0
+        }
+      ],
+      "actions": [
+        {
+          "type": "on_enter",
+          "effect": "stagger_children",
+          "stagger_ms": 80
+        },
+        {
+          "type": "on_scroll",
+          "effect": "activate_viewport",
+          "threshold": 0.25
+        }
+      ]
+    }
+  ],
+  "generator_note": "Motion inference is heuristic; please review 'dominant_motion' and adjust per design intent."
+}
